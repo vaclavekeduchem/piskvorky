@@ -10,23 +10,22 @@ def vypis_hraci_pole(hraci_pole: list):
 
 
 # Převede hodnoty num. klávesnice na index pole
-def cislo_na_index(hraci_pole: list, numpad_value: int, hrac: str):
+def cislo_na_index(numpad_value: int):
     match numpad_value:
         case 1:
-            hraci_pole[6] = hrac
+            return 6
         case 2:
-            hraci_pole[7] = hrac
+            return 7
         case 3:
-            hraci_pole[8] = hrac
+            return 8
         case 7:
-            hraci_pole[0] = hrac
+            return 0
         case 8:
-            hraci_pole[1] = hrac
+            return 1
         case 9:
-            hraci_pole[2] = hrac
+            return 2
         case _:
-            hraci_pole[numpad_value - 1] = hrac
-
+            return numpad_value - 1
 
 def main():
     hraci_pole = ["*", "*", "*", "*", "*", "*", "*", "*", "*"]
@@ -41,8 +40,12 @@ def main():
             hrac = input("Vyber si stranu (X/O): ")
 
         # Ovládání celé hry
-        numpad_value = int(input("Vyber si pole (1-9): "))
-        cislo_na_index(hraci_pole, numpad_value, hrac)
+        while True:
+            numpad_value = int(input("Vyber si pole (1-9): "))
+            if hraci_pole[cislo_na_index(numpad_value)] not in hraci:
+                hraci_pole[cislo_na_index(numpad_value)] = hrac
+                break
+
 
         vypis_hraci_pole(hraci_pole)
 
