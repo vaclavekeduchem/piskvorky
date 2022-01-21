@@ -27,8 +27,10 @@ def cislo_na_index(numpad_value: int):
         case _:
             return numpad_value - 1
 
+
 def main():
     hraci_pole = ["*", "*", "*", "*", "*", "*", "*", "*", "*"]
+    vyhra = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [7, 4, 1], [8, 5, 2], [9, 6, 3], [1, 5, 9], [3, 5, 7]]
     hrac = ""
     hraci = ["X", "O"]
 
@@ -41,11 +43,15 @@ def main():
 
         # Ovládání celé hry
         while True:
-            numpad_value = int(input("Vyber si pole (1-9): "))
+            numpad_value = int(input(f"Hraješ {hrac}, vyber si pole (1-9): "))
             if hraci_pole[cislo_na_index(numpad_value)] not in hraci:
                 hraci_pole[cislo_na_index(numpad_value)] = hrac
                 break
 
+        for v in vyhra:
+            if hraci_pole[v[0] - 1] == hrac and hraci_pole[v[1] - 1] == hrac and hraci_pole[v[2] - 1] == hrac:
+                print(f"{hrac} vyhrál!")
+                exit()
 
         vypis_hraci_pole(hraci_pole)
 
