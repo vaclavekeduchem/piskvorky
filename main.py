@@ -43,17 +43,22 @@ def main():
 
         # Ovládání celé hry
         while True:
-            numpad_value = int(input(f"Hraješ {hrac}, vyber si pole (1-9): "))
-            if hraci_pole[cislo_na_index(numpad_value)] not in hraci:
-                hraci_pole[cislo_na_index(numpad_value)] = hrac
-                break
 
+            numpad_value = input(f"Hraješ {hrac}, vyber si pole (1-9): ")
+            if numpad_value.isnumeric():
+                numpad_value = int(numpad_value)
+
+                if hraci_pole[cislo_na_index(numpad_value)] not in hraci:
+                    hraci_pole[cislo_na_index(numpad_value)] = hrac
+                    break
+
+        vypis_hraci_pole(hraci_pole)
+
+        # Validace výhra
         for v in vyhra:
             if hraci_pole[v[0] - 1] == hrac and hraci_pole[v[1] - 1] == hrac and hraci_pole[v[2] - 1] == hrac:
                 print(f"{hrac} vyhrál!")
                 exit()
-
-        vypis_hraci_pole(hraci_pole)
 
         # Přehození stran
         if hrac == hraci[0]:
